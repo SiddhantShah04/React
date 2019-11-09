@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Todo List</title>
+        
+        <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+        <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+        <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    </head>
+</html>
+<body>
+    <h1 id="app"></h1>
+    <script type="text/babel">
+        class App extends React.Component{
+            constructor(props){
+                super(props);
+                this.state = {
+                    tasks: [],
+                    input: "",
+                    response:"",
+                    count:0
+                    
+                }
+            }
+            render(){
+                return (
+                    <div>
+                        <h1>
+                            Todo list    
+                        </h1>    
+                        <ul>
+                            {
+                                this.state.tasks.map((tasks,i) =>
+                                <li key={i}>
+                                    <button data-index={i} onClick={this.DeleteTasks}>Delete</button> {tasks}
+                                </li>
+                                )}
+                        </ul>
+                        <div>
+                            <input onChange={this.handleChange} value={this.state.input} />
+                            <button onClick={this.addTasks}>Add tasks</button>
+                            
+                        </div>
+                        <h5>Total no if tasks:{this.state.count}</h5>
+                    </div>
+                ); 
+            }
+            handleChange = (event) => {
+                this.setState({
+                    input:event.target.value
+                });
+            }
+            addTasks = () => {
+                this.setState(state =>({
+                    tasks:[...this.state.tasks,this.state.input],
+                    input:"",
+                    count:state.count+1
+                }));
+            }
+            DeleteTasks = (evennt) => {
+                const index= event.target.dataset.index;
+                this.setState( state => {
+                    const tasks=[...this.state.tasks]
+                    tasks.splice(index,1)
+                    return {
+                        tasks: tasks,
+                        count:state.count-1
+                    };
+                });
+            }
+        }       
+        ReactDOM.render(<App />, document.querySelector("#app")); 
+    </script>
+</body>
