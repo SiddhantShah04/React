@@ -19,7 +19,6 @@
                     input: "",
                     response:"",
                     count:0
-                    
                 }
             }
             render(){
@@ -57,7 +56,7 @@
                     count:state.count+1
                 }));
             }
-            DeleteTasks = (evennt) => {
+            DeleteTasks = (event) => {
                 const index= event.target.dataset.index;
                 this.setState( state => {
                     const tasks=[...this.state.tasks]
