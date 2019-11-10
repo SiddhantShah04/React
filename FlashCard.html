@@ -19,7 +19,7 @@
         </style>
     </head>
     <body>
-            <div id="app" /></div>
+        <div id="app" /></div>
         <script type="text/babel">
         class CardEditor extends React.Component{
             constructor(props){
@@ -83,14 +83,29 @@
           
             }
         class CardViewer extends React.Component{
+            constructor(props){
+                super(props);
+                this.state={
+                    front:"",
+                    back:""
+                }
+                
+            }
             render(){
+                const rows = this.props.cards.map((cards,i)=>{
+                return(
+                        <div key={i}>
+                            <h1>{cards.front}</h1>
+                        
+                        </div>
+                     );
+                });
                 return(
                     <div>
-                        This is the viewer
-                        <hr/>
-                        <button onClick={this.props.SwitchMode}> Switch to editor </button>
+                        {rows}
+                        <button onClick={this.props.SwitchMode}> Switch to viewer </button>
                     </div>
-                );
+                    );
             }
         }
         class App extends React.Component{
